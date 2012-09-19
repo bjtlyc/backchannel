@@ -2,13 +2,23 @@
 <html>
 <head>
   <title>Backchannel</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "backchannel","application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
+<body id="store">
+	<div id="banner">
+		<%= @page_title || "Post Panel" %>
+	</div>
+	<div id="columns">
+		<div id="side">
+			<a href= "http://localhost:3000">Home</a><br/>
+			<a href= "http://localhost:3000">FAQ</a><br/>
+			<a href= "http://localhost:3000">Contact</a><br/>
+		</div>
+		<div id="main">
+			<%= yield %>
+		</div>
 
 </body>
 </html>

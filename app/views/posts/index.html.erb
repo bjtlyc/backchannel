@@ -4,9 +4,9 @@
 <table>
   <tr>
     <th>Title</th>
+    <th>category</th>
     <th>Content</th>
-    <th>Userid</th>
-    <th></th>
+    <th>User Id</th>
     <th></th>
     <th></th>
   </tr>
@@ -14,8 +14,9 @@
 <% @posts.each do |post| %>
     <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
     <td><%= post.title %></td>
+    <td><%= post.category %></td>
     <td><%= post.content %></td>
-    <td><%= post.userid %></td>
+    <td><%= post.user_id %></td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>

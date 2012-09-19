@@ -1,19 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @post.title %>
-</p>
+<div id="product_list">
 
-<p>
-  <b>Content:</b>
-  <%= @post.content %>
-</p>
+<table>
+  <tr>
+    <th>Title</th>
+    <th></th>
+    <th>category</th>
+    <th></th>
+    <th>Content</th>
+    <th></th>
+    <th>User Id</th>
+    <th></th>
+  </tr>
+  
+  <tr>
+    <td><%= @post.title %></td>
+    <td><%= @post.category %></td>
+    <td><%= @post.content %></td>
+    <td><%= @post.user_id %></td>
+    <!-- <td><%= @post.votenum %></td> --!>
+  </tr>
 
-<p>
-  <b>Userid:</b>
-  <%= @post.userid %>
-</p>
+<% @commnet.each do |comment| %>
+	<% if comment.post_id = @post.id %>
+		<tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+  		<td><%= comment.user_id %></td>
+   	 	<td><%= comment.content %></td>
+	</tr>
+<% end %>
+</table>
+</div>
 
 
 <%= link_to 'Edit', edit_post_path(@post) %> |

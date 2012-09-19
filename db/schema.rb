@@ -11,14 +11,40 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120918190551) do
+ActiveRecord::Schema.define(:version => 20120919074325) do
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "votenum"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.text     "content"
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
-    t.decimal  "userid"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "category"
+    t.integer  "votenum"
+  end
+
+  create_table "users", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "name"
+    t.string   "password"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "comment_id"
   end
 
 end
