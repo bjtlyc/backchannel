@@ -49,9 +49,8 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-	@comment.update_attribute('user_id',@comment.user_id)
 	@comment.update_attribute('post_id', @comment.post_id)
-        format.html { redirect_to @commnet.post.show, notice: 'Comment was successfully created, user.' }
+        format.html { redirect_to user_url, notice: 'Comment was successfully created, user.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }
@@ -67,7 +66,8 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+	@comment.update_attribute('user_id',@comment.user_id)
+        format.html { redirect_to @comment.post, notice: 'Comment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

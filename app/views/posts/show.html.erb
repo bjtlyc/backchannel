@@ -16,18 +16,28 @@
   
   <tr>
     <td><%= @post.title %></td>
+    <th></th>
     <td><%= @post.category %></td>
+    <th></th>
     <td><%= @post.content %></td>
+    <th></th>
     <td><%= @post.user_id %></td>
+    <th></th>
     <!-- <td><%= @post.votenum %></td> --!>
   </tr>
 
-<% @commnet.each do |comment| %>
-	<% if comment.post_id = @post.id %>
+  <tr>
+	  <td></td>
+	  <td>Comments:</td>
+  </tr>
+
+  <% @comments.each do |comment| %>
+	<% if comment.post_id == @post.id %>
 		<tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
   		<td><%= comment.user_id %></td>
    	 	<td><%= comment.content %></td>
-	</tr>
+		</tr>
+	<% end %>
 <% end %>
 </table>
 </div>

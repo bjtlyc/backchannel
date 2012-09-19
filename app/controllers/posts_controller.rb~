@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @comments = Post.comment.all
+    @comments = Post.comments.all
     @post = Post.find(params[:id])
 
     respond_to do |format|

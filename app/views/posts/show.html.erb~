@@ -5,18 +5,42 @@
 <table>
   <tr>
     <th>Title</th>
+    <th></th>
     <th>category</th>
+    <th></th>
     <th>Content</th>
+    <th></th>
     <th>User Id</th>
+    <th></th>
   </tr>
   
   <tr>
     <td><%= @post.title %></td>
+    <th></th>
     <td><%= @post.category %></td>
+    <th></th>
     <td><%= @post.content %></td>
+    <th></th>
     <td><%= @post.user_id %></td>
+    <th></th>
+    <!-- <td><%= @post.votenum %></td> --!>
   </tr>
 
+  <tr>
+	  <td></td>
+	  <td>Comments:</td>
+  </tr>
+
+  <% @comments.each do |comment| %>
+	<% if comment.post_id == @post.id %>
+		<tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+  		<td><%= comment.user_id %></td>
+  		<td><%= @post.id %></td>
+  		<td><%= comment.post_id %></td>
+   	 	<td><%= comment.content %></td>
+		</tr>
+	<% end %>
+<% end %>
 </table>
 </div>
 
