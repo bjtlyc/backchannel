@@ -7,6 +7,7 @@ class PanelController < ApplicationController
 		  @posts= $spost
 	  end
 	  @user = current_user 
+	  @alluser = User.all
   end
 
   def search
@@ -34,7 +35,7 @@ class PanelController < ApplicationController
 	 elsif params[:search] == "category"
 		 @posts = Post.all
 		 @posts.each do |post|
-			 if post.category == $category[params[:category]]
+			 if post.category == $category[params[:category][:value]]
 				 $spost << post
 			 end
 		 end

@@ -9,7 +9,7 @@
 	<%= label_tag("search_method", "search by user") %>
 	<%= radio_button_tag("search", "category") %>
 	<%= label_tag("search_method", "search by category") %>
-	<%= select( :category, :value, $category ) %>
+	<%= select( "category", "value", $category ) %>
 	&nbsp&nbsp&nbsp&nbsp
 	<%= label_tag("tkeyword", "keyword") %>
 	<%= text_field_tag("keyword") %>
@@ -27,7 +27,8 @@
 <% @posts.each do |post| %>
 	<div class="entry">
 		<h3><%= link_to post.title, post %></h3>
-		<p>UserId:<%= sprintf("%08d",post.user_id) %></p>
+		<% @user = User.find(post.user_id) %>
+		<p>Author:<%= @user.name %></p>
 		<p><%= post.category %></p>
 		<%= sanitize(post.content) %>
 

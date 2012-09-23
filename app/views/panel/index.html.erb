@@ -27,7 +27,8 @@
 <% @posts.each do |post| %>
 	<div class="entry">
 		<h3><%= link_to post.title, post %></h3>
-		<p>UserId:<%= sprintf("%08d",post.user_id) %></p>
+		<% @tuser = User.find(post.user_id) %>
+		<p>Author:<%= @tuser.name %></p>
 		<p><%= post.category %></p>
 		<%= sanitize(post.content) %>
 
