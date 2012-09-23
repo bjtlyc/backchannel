@@ -2,33 +2,31 @@
 
 <div id="product_list">
 
-<table>
+<table class="show_panel">
   <tr>
     <th>Title</th>
-    <th></th>
     <th>category</th>
-    <th></th>
+    <th>User</th>
     <th>Content</th>
-    <th></th>
-    <th>User Id</th>
-    <th></th>
+    <th>Vote</th>
   </tr>
   
   <tr>
     <td><%= @post.title %></td>
-    <th></th>
     <td><%= @post.category %></td>
-    <th></th>
-    <td><%= @post.content %></td>
-    <th></th>
     <td><%= @post.user_id %></td>
-    <th></th>
-    <!-- <td><%= @post.votenum %></td> --!>
+    <td><%= @post.content %></td>
+    <td><%= @post.votenum %></td>
+
   </tr>
 
+  <tr><td></td></tr>
+  <tr><td></td></tr>
+  <tr><td></td></tr>
   <tr>
-	  <td></td>
-	  <td>Comments:</td>
+	  <th>User</th>
+	  <th>Comments:</th>
+	  <th>Vote</th>
   </tr>
 
   <% @comments.each do |comment| %>
@@ -36,12 +34,45 @@
 		<tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
   		<td><%= comment.user_id %></td>
    	 	<td><%= comment.content %></td>
+		<td><%= comment.votenum %></td>
+		<% if @user.id != comment.user_id %>
+			<td><%= button_to 'vote', votes_path(:comment => comment, :ifpost => 0, :post => @post, :comment_id => comment.id)  %></td>
+		<% else %>
+			<td><%= button_to 'vote', votes_path(:comment => comment, :ifpost => 0, :post => @post, :comment_id => comment.id), :disabled => true  %></td>
+		<% end %>
+		<% if @user.id == comment.user_id %>
+			<td><%= link_to 'Edit', edit_comment_path(comment) %></td>
+			<td><%= link_to 'Delete', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<% else %>
+			<td></td>
+			<td></td>
+		<% end %>
 		</tr>
 	<% end %>
 <% end %>
+
+  <tr><td></td></tr>
+  <tr><td></td></tr>
+  <tr>
+	<th>People who voted this post</th>
+  </tr>
+	  <tr>
+  		  <% @vote.each do |vote| %>
+	 	  <% @fuser=User.find(vote.user_id) %>
+		  <td><%= @fuser.name %></td>
+	  </tr>
+  <% end %>
+
+
 </table>
 </div>
 
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<% if @user.id == @post.user_id %>
+	<%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
+<% if @user.ifadmin == true %>
+	<%= link_to 'Back', posts_path %>
+<% else %>
+	<%= link_to 'Back', panel_path %>
+<% end %>

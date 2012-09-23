@@ -5,7 +5,13 @@ class SessionsController < ApplicationController
   def create
 	  if user=User.authenticate(params[:name], params[:password])
 		  session[:user_id] = user.id
-		  redirect_to admin_url
+		  if user.ifadmin == true
+			  session[:ifadmin] = true
+		  	redirect_to users_url(:ifadmin => true)
+		  else
+			  session[:ifadmin] = false 
+			redirect_to panel_path(:ifadmin => false)
+		  end
 	  else
 		  redirect_to login_url, :alert => "Invalid user/password combination"
 	  end

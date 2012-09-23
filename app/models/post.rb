@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   default_scope :order => 'updated_at DESC'
   attr_accessible :content, :title, :user_id, :category
-  validates :title, :content, :category, :user_id, :presence =>true
+  validates :title, :content, :category,  :presence =>true
   has_many :votes
   has_many :comments
   belongs_to :user

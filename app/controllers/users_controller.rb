@@ -44,7 +44,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_url, notice: 'User was successfully created.' }
+	session[:user_id] = @user.id
+        format.html { redirect_to admin_url, notice: 'User was successfully created.' }
+
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -80,4 +82,38 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def addadmin 
+    @user = User.find(params[:user])
+
+    respond_to do |format|
+      if @user.save
+    @user.update_attribute('ifadmin', params[:admin]) 
+        format.html { redirect_to users_url, notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+
+
+  def rmvadmin 
+    @user = User.find(params[:user])
+
+    respond_to do |format|
+      if @user.save
+    @user.update_attribute('ifadmin', params[:admin]) 
+        format.html { redirect_to users_url, notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /users/1
 end

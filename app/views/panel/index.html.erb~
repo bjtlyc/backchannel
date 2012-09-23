@@ -2,16 +2,46 @@
 	<p id="notice"><%= notice %></p>
 <% end %>
 
+<%= form_tag(panel_search_path, :method => "get") do %>
+	<%= radio_button_tag("search", "post") %>
+	<%= label_tag("search_method", "search by post") %>
+	<%= radio_button_tag("search", "user") %>
+	<%= label_tag("search_method", "search by user") %>
+	<%= radio_button_tag("search", "category") %>
+	<%= label_tag("search_method", "search by category") %>
+	<%= select( :category, :value, $category ) %>
+	&nbsp&nbsp&nbsp&nbsp
+	<%= label_tag("tkeyword", "keyword") %>
+	<%= text_field_tag("keyword") %>
+	<%= submit_tag("search") %>
+<% end %>
+
+
+<br/><br/>
+<% if session[:user_id] %>
+	<%= link_to 'New Post', new_post_path %>
+<% end %>
+
 <h1>Your Pragmatic Catalog<h1>
 
 <% @posts.each do |post| %>
 	<div class="entry">
-		<h3><%= post.title %></h3>
+		<h3><%= link_to post.title, post %></h3>
 		<p>UserId:<%= sprintf("%08d",post.user_id) %></p>
 		<p><%= post.category %></p>
 		<%= sanitize(post.content) %>
-		<%= button_to 'vote',votes_path(:post_id => post) %>	
-		<%= link_to 'Make a Comment', new_comment_path(:post_id => post.id) %>
+
+		<% if session[:user_id] %>
+			<% @vote = Vote.count(:conditions => { :user_id => @user.id, :post_id => post.id } ) %>
+			<% if @vote == 0 %>
+				<%= button_to 'vote',votes_path(:post_id => post, :ifpost => 1, :postid => post.id)  %>	
+			<% else %>
+				
+			<%= @vote %>
+			<%= button_to 'vote',votes_path(:post_id => post, :ifpost => 1, :postid => post.id), :disabled => true  %> <p>You already voted it</p>	
+			<% end %>
+			<%= link_to 'Make a Comment', new_comment_path(:post_id => post) %>
+		<% end %>
 	</div>
 <% end %>
 

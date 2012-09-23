@@ -41,13 +41,28 @@ class VotesController < ApplicationController
   # POST /votes.json
   def create
     @user = current_user
-    post = Post.find(params[:post_id])
+    if params[:ifpost] == "1"
+    	post = Post.find(params[:post_id])
     #@vote = Vote.new(params[:vote])
-    @vote = post.add_user(@user.id)
+    	@vote = post.votes.build(:user => @user )
+    	@num = Vote.count( :conditions => { :post_id => params[:postid]})+1
+    	post.update_attribute('votenum' , @num)
+    else
+	comment = Comment.find(params[:comment])
+	@vote = comment.votes.build(:user=> @user)
+    	post = Post.find(params[:post])
+	@num = Vote.count(:conditions => { :comment_id => params[:comment_id] })+1
+	comment.update_attribute('votenum', @num)
+    end
 
     respond_to do |format|
       if @vote.save
+	      if params[:ifpost] == "1"
         format.html { redirect_to @vote.post, notice: 'Vote was successfully created.' }
+	      else
+        format.html { redirect_to post, notice: 'Vote was successfully created.' }
+
+	      end
         format.json { render json: @vote, status: :created, location: @vote }
       else
         format.html { render action: "new" }

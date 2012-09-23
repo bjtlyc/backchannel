@@ -1,17 +1,12 @@
 Backchannel::Application.routes.draw do
 	get 'admin' => 'admin#index'
+
 	controller :sessions do
 		get 'login' => :new
 		post 'login' => :create
 		delete 'logout' => :destroy
 	end
   get "admin/index"
-
-  get "sessions/new"
-  
-  get "sessions/create"
-
-  get "sessions/destroy"
 
   resources :comments
 
@@ -22,6 +17,10 @@ Backchannel::Application.routes.draw do
   get "panel/index"
 
   resources :posts
+
+  match 'user/addadmin', :controller => 'users', :action => 'addadmin' 
+
+  match 'panel/search', :controller => 'panel', :action => 'search' 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

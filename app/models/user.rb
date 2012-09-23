@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   def User.authenticate(name,password)
 	  if user = find_by_name(name)
-		  if user = find_by_password(password)
+		  if user.password == password
 			  user
 		  end
 	  end

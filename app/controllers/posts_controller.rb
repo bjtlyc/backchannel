@@ -15,6 +15,9 @@ class PostsController < ApplicationController
   def show
     @comments = Comment.all
     @post = Post.find(params[:id])
+    @user = current_user
+    @vote = Vote.group("user_id").where(["post_id = ?",params[:id]]).all
+   
 
     respond_to do |format|
       format.html # show.html.erb
@@ -42,9 +45,11 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
+    @user= current_user
 
     respond_to do |format|
       if @post.save
+	 @post.update_attribute("user_id",@user.id)
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else

@@ -18,6 +18,12 @@ Backchannel::Application.routes.draw do
 
   resources :posts
 
+  match 'user/addadmin', :controller => 'users', :action => 'addadmin' 
+
+  match 'panel/search', :controller => 'panel', :action => 'search' 
+
+  match 'user/rmvadmin', :controller => 'users', :action => 'rmvadmin' 
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

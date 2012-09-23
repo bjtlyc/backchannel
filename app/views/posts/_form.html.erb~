@@ -17,15 +17,15 @@
   </div>
   <div class="field">
     <%= f.label :category %><br />
-    <%= f.text_field :category %>
+    <%= f.select :category, options_for_select($category) %>
   </div>
   <div class="field">
     <%= f.label :content %><br />
     <%= f.text_area :content %>
   </div>
   <div class="field">
-    <%= f.label :userid %><br />
-    <%= f.text_field :userid %>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
   </div>
   <div class="actions">
     <%= f.submit %>
