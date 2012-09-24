@@ -12,9 +12,9 @@
 	</div>
 	<div id="columns">
 		<div id="side">
-			<% link_to'Home', panel_path %><br/>
-			<% link_to'FAQ', panel_path %><br/>
-			<% link_to'Contact', panel_path %><br/>
+			<%= link_to'Home', panel_path %><br/>
+			<%= link_to'FAQ', panel_path %><br/>
+			<%= link_to'Contact', panel_path %><br/>
 			<% if session[:user_id] %>
 				<% if session[:ifadmin] == true %>
 					<br/>
