@@ -12,10 +12,9 @@
 	</div>
 	<div id="columns">
 		<div id="side">
-			<a href= "http://localhost:3000">Home</a><br/>
-			<a href= "http://localhost:3000">FAQ</a><br/>
-			<a href= "http://localhost:3000">Contact</a><br/>
-
+			<% link_to'Home', panel_path %><br/>
+			<% link_to'FAQ', panel_path %><br/>
+			<% link_to'Contact', panel_path %><br/>
 			<% if session[:user_id] %>
 				<% if session[:ifadmin] == true %>
 					<br/>
