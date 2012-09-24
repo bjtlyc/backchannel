@@ -41,7 +41,7 @@ class PanelController < ApplicationController
 	 end
 
           respond_to do |format|
-            format.html { redirect_to panel_path }
+            format.html { redirect_to panel_index_path }
       	    format.json { head :no_content }
     end
   end

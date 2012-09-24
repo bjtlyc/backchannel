@@ -10,6 +10,8 @@
     <th>Content</th>
     <th>Vote</th>
   </tr>
+
+  <tr><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr>
   
   <tr>
     <td><%= @post.title %></td>
@@ -41,7 +43,7 @@
 		<% else %>
 			<td><%= button_to 'vote', votes_path(:comment => comment, :ifpost => 0, :post => @post, :comment_id => comment.id), :disabled => true  %></td>
 		<% end %>
-		<% if @user.id == comment.user_id %>
+		<% if @user.id == comment.user_id || session[:ifadmin] == true %>
 			<td><%= link_to 'Edit', edit_comment_path(comment) %></td>
 			<td><%= link_to 'Delete', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		<% else %>
@@ -52,7 +54,7 @@
 	<% end %>
 <% end %>
 
-  <tr><td></td></tr>
+  <tr><td><%= link_to 'Make a Comment', new_comment_path(:post_id => @post) %></td></tr>
   <tr><td></td></tr>
   <tr>
 	<th>People who voted this post</th>

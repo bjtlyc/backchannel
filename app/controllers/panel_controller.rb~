@@ -7,7 +7,6 @@ class PanelController < ApplicationController
 		  @posts= $spost
 	  end
 	  @user = current_user 
-	  @alluser = User.all
   end
 
   def search

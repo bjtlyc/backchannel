@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
 	  if user=User.authenticate(params[:name], params[:password])
 		  session[:user_id] = user.id
 		  if user.ifadmin == true
-			  session[:ifadmin] == true
+			  session[:ifadmin] = true
 		  	redirect_to users_url(:ifadmin => true)
 		  else
-			  session[:ifadmin] == false 
+			  session[:ifadmin] = false 
 			redirect_to panel_path(:ifadmin => false)
 		  end
 	  else
