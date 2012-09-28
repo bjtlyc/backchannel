@@ -64,9 +64,6 @@
   background:   #f8b0f8;
 }
 
-#product_list .show_panel td {
-  width: 120px; 
-}
 /* An entry in the store catalog */
 
 #store  .entry {
@@ -133,7 +130,7 @@
 }
 
 #columns {
-  background: #141;
+  background: #841;
 }
 
 #main {

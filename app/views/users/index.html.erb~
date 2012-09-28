@@ -14,8 +14,10 @@
   <tr>
     <td><%= user.name %></td>
 
-    <% if session[:ifadmin] == true %>
+    <% if user.ifadmin == true %>
+	    <% if user.id != @cuser.id %>
     	<td><%= link_to 'Remove Admin', user_rmvadmin_path( :user => user, :admin => false ) %></td>
+		<% end %>
     <% else %>
     	<td><%= link_to 'Make Admin', user_addadmin_path( :user => user, :admin => true ) %></td>
     <% end %>

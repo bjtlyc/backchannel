@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   validates :password, :confirmation => true
   attr_accessible :title, :body, :password_confirmation, :password, :name
   has_many :posts, :dependent => :destroy
-  has_many :votes
-  has_many :comments
+  has_many :votes, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
   validate :password_must_be_present
   private
   def password_must_be_present

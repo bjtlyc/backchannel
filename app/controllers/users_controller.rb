@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.order(:name)
+    @cuser = current_user
 
     respond_to do |format|
       format.html # index.html.erb

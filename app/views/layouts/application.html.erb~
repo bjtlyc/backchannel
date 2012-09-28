@@ -10,10 +10,9 @@
 	<div id="banner">
 		<%= @page_title || "Post Panel" %>
 	</div>
-	<div id="columns">
 		<div id="side">
 			<%= link_to'Home', panel_index_path %><br/>
-			<%= link_to'FAQ', panel_path %><br/>
+			<%= link_to'FAQ', panel_map_path %><br/>
 			<%= link_to'Contact', "http://www4.ncsu.edu/~yliu63/index.html" %><br/>
 			<% if session[:user_id] %>
 				<% if session[:ifadmin] == true %>

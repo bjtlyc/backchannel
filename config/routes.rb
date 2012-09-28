@@ -16,6 +16,8 @@ Backchannel::Application.routes.draw do
 
   get "panel/index"
 
+  get "panel/map"
+
   resources :posts
 
   match 'user/addadmin', :controller => 'users', :action => 'addadmin' 
